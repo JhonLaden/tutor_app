@@ -19,6 +19,8 @@
         "vue-tsc": "^3.0.1"
     },
     "dependencies": {
+        "compromise": "^14.14.4",
+        "compromise-dates": "^3.7.1",
         "pinia": "^3.0.3",
         "pinia-plugin-persistedstate": "^4.4.1",
         "primeicons": "^7.0.0",
