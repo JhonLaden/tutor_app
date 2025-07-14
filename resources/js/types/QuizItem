@@ -1,0 +1,5 @@
+export interface QuizItem {
+    question: string; // The question text with a blank
+    answer: string; // The correct answer
+    choices: string[]; // All answer options (including correct one)
+}
