@@ -26,7 +26,7 @@ const handleSignin = async () => {
         router.push("/");
     } else {
         console.log(response.data);
-    }   
+    }
 };
 </script>
 
