@@ -2,11 +2,11 @@
 import { onMounted, reactive, ref } from "vue";
 import axios from "axios";
 
-const message = ref("Elon Musk founded SpaceX in 2002 with $100 million.");
-const myObject = ref<{}>({});
+const message = ref("");
+const result = ref<{}>({});
 
 const handleSubmit = () => {
-    console.log("clicked");
+    fetchData();
 };
 
 const fetchData = async () => {
@@ -15,13 +15,14 @@ const fetchData = async () => {
             message: message.value,
         });
         const data = response.data;
-        myObject.value = data;
+        result.value = data;
+        console.log(result.value);
     } catch (error) {
         console.error("error: ", error);
     }
 };
 
-onMounted(fetchData);
+// onMounted(fetchData);
 </script>
 
 <template>
@@ -31,10 +32,14 @@ onMounted(fetchData);
             name="sentence"
             id="sentence"
             placeholder="Enter sentence"
+            v-model="message"
         />
         <button type="submit">Submit</button>
     </form>
-    <ul v-if="myObject">
-        <li v-for="item in myObject">{{ item }}</li>
+    <ul v-if="result">
+        <li v-for="item in result">
+            <p>Who {{ item.verb }}?</p>
+            <p>what {{ item.subject }} did?</p>
+        </li>
     </ul>
 </template>

@@ -24,14 +24,23 @@ def analyze():
     sentence = data.get("sentence", "")
     doc = nlp(sentence)
     
-    result = []
+    result = {
+        'item': {
+            'subject': None,
+            'verb': None
+        }
+    }
+    
     for token in doc:
-        result.append({
-            "entokent text": token.text,
-            "token label_": token.lemma_,
-        })
-
+        if token.dep_ == "nsubj":
+            result['item']['subject'] = token.text
+            result['item']['verb'] = token.head.text
+            break  # stop at the first match
+            
     return jsonify(result)
+
+
+
 
 if __name__ == '__main__':
    app.run(debug=True, port=5001)
