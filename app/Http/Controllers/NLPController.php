@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use LDAP\Result;
 
 class NLPController extends Controller
 {
@@ -15,7 +16,8 @@ class NLPController extends Controller
                 'sentence' => $request->input('message'),
             ]);
 
-            return response()->json($response->json());
+
+            return response()->json(['item' => $response->json()]);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to connect to NLP service.',

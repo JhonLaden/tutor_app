@@ -9,20 +9,23 @@ class TestApp(unittest.TestCase):
 
     def test_analyze(self):
         response = self.client.post('/analyze', json={
-            "sentence": "Shakespeare died in 1616."
+           'sentence': 'Einstein developed the theory of relativity.'
         })
-        
         self.assertEqual(response.status_code, 200)
         result = response.get_json()
         
+        expectedAnswers = []
         expected = {
-            "item": {
-                "subject": "Shakespeare",
-                "verb": "died"
-            }
+            "noun": "Einstein",
+            "verb": "developed",
+            "object": "the theory of relativity",
+            "sentence": "Einstein developed the theory of relativity.",
+            "question": "who developed the theory of relativity?",
+            "answer": "Einstein",
         }
-        self.assertEqual(result,expected)
+        expectedAnswers.append(expected)
         
+        self.assertEqual(result,expectedAnswers)
 
 if __name__ == '__main__':
     unittest.main()

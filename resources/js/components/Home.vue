@@ -6,6 +6,7 @@ const message = ref("");
 const result = ref<{}>({});
 
 const handleSubmit = () => {
+    message.value = "Einstein developed the theory of relativity.";
     fetchData();
 };
 
@@ -15,8 +16,7 @@ const fetchData = async () => {
             message: message.value,
         });
         const data = response.data;
-        result.value = data;
-        console.log(result.value);
+        result.value = data.item;
     } catch (error) {
         console.error("error: ", error);
     }
@@ -37,9 +37,12 @@ const fetchData = async () => {
         <button type="submit">Submit</button>
     </form>
     <ul v-if="result">
-        <li v-for="item in result">
-            <p>Who {{ item.verb }}?</p>
-            <p>what {{ item.subject }} did?</p>
+        <li v-for="item in result" :key="item.noun">
+            <p>Noun: {{ item.noun }}</p>
+            <p>Verb: {{ item.verb }}</p>
+            <p>Object: {{ item.object }}</p>
+            <p>question: {{ item.question }}</p>
+            <p>answer: {{ item.answer }}</p>
         </li>
     </ul>
 </template>
